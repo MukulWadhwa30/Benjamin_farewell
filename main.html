@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Benjamin’s Coding Journey</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Courier New', Courier, monospace;
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: #f0f0f0;
+      text-align: center;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    h1 {
+      font-size: 3em;
+      margin-top: 40px;
+      color: #00ffe5;
+      text-shadow: 2px 2px #000;
+    }
+
+    .badge {
+      width: 120px;
+      height: 120px;
+      background-image: url('https://cdn-icons-png.flaticon.com/512/1055/1055646.png');
+      background-size: contain;
+      background-repeat: no-repeat;
+      margin: 20px auto;
+    }
+
+    button {
+      background-color: #00ffe5;
+      color: #000;
+      font-size: 1.2em;
+      padding: 14px 28px;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-top: 20px;
+      font-weight: bold;
+      box-shadow: 0 0 10px #00ffe5, 0 0 20px #00ffe5;
+      transition: transform 0.2s ease;
+    }
+
+    button:hover {
+      transform: scale(1.05);
+      box-shadow: 0 0 20px #00ffe5, 0 0 30px #00ffe5;
+    }
+
+    .message-box {
+      width: 90%;
+      max-width: 700px;
+      margin-top: 40px;
+      background: rgba(0, 0, 0, 0.6);
+      padding: 25px;
+      border-radius: 15px;
+      text-align: left;
+      font-size: 1.1em;
+      line-height: 1.7;
+      display: none;
+      white-space: pre-line;
+      box-shadow: 0 0 15px rgba(0, 255, 255, 0.5);
+      overflow-y: auto;
+      max-height: 400px;
+    }
+
+    .message-box span {
+      display: inline;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>💻 Benjamin’s Coding Journey</h1>
+  <div class="badge"></div>
+
+  <button id="revealButton">Click to Reveal Message</button>
+
+  <div class="message-box" id="farewellMessage">
+    <span id="text"></span>
+  </div>
+
+  <script>
+    const message = `Hey Benjamin!
+
+I can’t believe it’s already our last class together! It’s been so much fun teaching you and watching you become such a smart and creative coder. You’ve done an awesome job—whether it was solving tricky problems, fixing bugs, or coming up with cool ideas, I was always super proud of you.
+
+More than just learning how to code, you were always curious, worked hard, and stayed positive—and those are superpowers that will help you do great things in the future!
+
+Even though our classes are ending, remember—you’re a coder now, and coders never stop learning or creating! Keep exploring, keep building, and most importantly, keep having fun.
+
+I’ll be cheering for you always, Benjamin!
+
+Take care,
+Mukul Wadhwa`;
+
+    let i = 0;
+    let typing = false;
+    let interval;
+
+    const button = document.getElementById("revealButton");
+    const box = document.getElementById("farewellMessage");
+    const text = document.getElementById("text");
+
+    function typeMessage() {
+      if (i < message.length) {
+        text.textContent += message.charAt(i);
+        i++;
+        box.scrollTop = box.scrollHeight;
+      } else {
+        clearInterval(interval);
+        typing = false;
+        button.textContent = "Click to Replay Message";
+      }
+    }
+
+    function revealMessage() {
+      clearInterval(interval); // stop any running animation
+      i = 0;
+      text.textContent = '';
+      box.style.display = "block";
+      box.scrollTop = 0;
+      button.textContent = "Click to Replay Message";
+      typing = true;
+      interval = setInterval(typeMessage, 25);
+    }
+
+    button.addEventListener("click", revealMessage);
+  </script>
+
+</body>
+</html>
